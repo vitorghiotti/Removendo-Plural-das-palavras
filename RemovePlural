@@ -1,0 +1,61 @@
+import re
+
+def processa_plural(word):
+    lst_plural = ['antes','apos']
+    
+    excessao_plural = list(word) in [list(row) for row in lst_plural]
+    
+    if excessao_plural==False:
+        if re.search(r's$', word):
+
+            if re.search(r'as$', word):
+                word = re.sub(r'irmas$', 'irma', word)
+                word = re.sub(r'ais$', 'al', word)
+                word = re.sub(r'aos$', 'ao', word)
+                word = re.sub(r'as$', 'a', word)
+                
+            elif re.search(r'es$', word):
+                if re.search(r'maes$', word):
+                    word = 'maes'
+                elif re.search(r'bres$', word):
+                    word = re.sub(r'bres$', 'bre', word)
+                elif re.search(r'zes$', word):
+                    word = re.sub(r'zes$', 'z', word)
+                elif re.search(r'tres$', word):
+                    word = re.sub(r'tres$', 'tre', word)
+                elif re.search(r'ores$', word):
+                    word = re.sub(r'tres$', 'tre', word)
+                else:
+                    word = re.sub(r'oes$', 'ao', word)
+                    word = re.sub(r'aes$', 'ao', word)
+                    word = re.sub(r'gues$','gues', word)
+                    word = re.sub(r'res$', 'r', word)
+                    word = re.sub(r'es$', 'e', word)
+
+            elif re.search(r'is$', word):
+                if re.search(r'veis$', word):
+                    word = re.sub(r'veis$', 'vel', word)
+                else:
+                    word = re.sub(r'ais$', 'al', word)
+                    word = re.sub(r'zis$', 'zil', word)
+                    word = re.sub(r'eis$', 'il', word)
+
+            elif re.search(r'os$', word):
+                if re.search(r'emos$', word):
+                    word = re.sub(r'emos$', 'emos', word)
+                elif re.search(r'amos$', word):
+                    word = re.sub(r'amos$', 'amos', word)
+                elif re.search(r'armos$', word):
+                    word = re.sub(r'armos$', 'armos', word)
+                else:
+                    word = re.sub(r'ois$', 'oi', word)
+                    word = re.sub(r'os$', 'o', word)
+
+            elif re.search(r'us$', word):
+                word = re.sub(r'eus$', 'eu', word)
+                word = re.sub(r'us$', 'u', word)
+
+            else:
+                word = re.sub(r'ns$', 'm', word)
+
+    return word
